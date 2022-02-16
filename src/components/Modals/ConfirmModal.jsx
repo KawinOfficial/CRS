@@ -20,7 +20,6 @@ import {
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 
 import axios from "axios";
-import Swal from "sweetalert2";
 
 export default function BookingModal({ formInput }) {
   const [ID, setID] = useState("");

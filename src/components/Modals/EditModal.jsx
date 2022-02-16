@@ -14,7 +14,7 @@ import {
   Grid,
   GridItem,
   Input,
-  useToast,
+  Tooltip,
 } from "@chakra-ui/react";
 
 import { FaTimesCircle } from "react-icons/fa";
@@ -38,9 +38,11 @@ export default function EditModal({ info }) {
 
   return (
     <>
-      <Button onClick={onOpen} colorScheme="yellow" size="sm">
-        <Icon as={FaUserEdit} />
-      </Button>
+      <Tooltip hasArrow label="Edit" placement="top">
+        <Button onClick={onOpen} colorScheme="yellow" size="sm">
+          <Icon as={FaUserEdit} />
+        </Button>
+      </Tooltip>
 
       {/* Modal */}
       <Modal

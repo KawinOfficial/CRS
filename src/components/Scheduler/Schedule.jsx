@@ -60,7 +60,7 @@ export default function MyCalendar({ information }) {
           style={{ height: "65vh" }}
           eventPropGetter={(event) => {
             const backgroundColor =
-              event.desc == "1169" ? "#6be585" : "#fdbb2d";
+              event.desc == "6298 (รถกระบะ)" ? "#6be585" : "#fdbb2d";
             return { style: { backgroundColor } };
           }}
           views={["month", "week", "day"]}

@@ -25,6 +25,7 @@ import addDays from "date-fns/addDays";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import fdatetime from "../../libs/fdatetime";
 import Swal from "sweetalert2";
+import getTime from "date-fns/getTime";
 
 export default function BookingModal() {
   const [formInput, setFormInput] = useState({
@@ -46,29 +47,27 @@ export default function BookingModal() {
 
     formInput.datetimeUse = fdatetime(datetimeUse).getFDatetime;
     formInput.datetimeReturn = fdatetime(datetimeReturn).getFDatetime;
-    // console.log(formInput);
 
-    axios
-      .post(urlPath, { ...formInput })
-      .then(({ data: { state } }) => {
-        if (state) {
-          Swal.fire({
-            title: "จองสำเร็จ (Booking success.)",
-            icon: "success",
-            timer: 1500,
-            showConfirmButton: false,
-          });
-        } else {
-          toast({
-            title: "จองไม่สำเร็จ (Booking error.)",
-            status: "error",
-            duration: 2000,
-            isClosable: true,
-            position: "top-right",
-          });
-        }
-      })
-      .then(handleClose());
+    axios.post(urlPath, { ...formInput }).then(({ data: { state } }) => {
+      handleClose();
+      if (state) {
+        Swal.fire({
+          title: "จองสำเร็จ (Booking success.)",
+          icon: "success",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+      } else {
+        toast({
+          title: "จองไม่สำเร็จ (Booking error.)",
+          description:
+            "กรุณาตรวจสอบช่วงเวลาว่างของรถ (Please check the availability of the car.)",
+          status: "error",
+          isClosable: true,
+          position: "top-right",
+        });
+      }
+    });
   };
 
   const handleClose = () => {
@@ -84,6 +83,20 @@ export default function BookingModal() {
       purpose: "",
     });
     onClose();
+  };
+
+  const filterPassedTime = (time) => {
+    const currentDate = new Date();
+    const selectedDate = new Date(time);
+    return currentDate.getTime() < selectedDate.getTime();
+  };
+
+  const diffTime = (start, end) => {
+    if ((start, end)) {
+      var diff = (getTime(end) - getTime(start)) / 1000;
+      diff /= 3600;
+      return diff.toFixed(1);
+    }
   };
 
   return (
@@ -256,8 +269,8 @@ export default function BookingModal() {
                     })
                   }
                 >
-                  <option value="1169">Car 1: 1169</option>
-                  <option value="1234">Car 2: 1234</option>
+                  <option value="6298 (รถกระบะ)">รถกระบะ 6298</option>
+                  <option value="8166 (รถหลังคาสูง)">รถหลังคาสูง 8166</option>
                 </Select>
               </GridItem>
 
@@ -292,6 +305,7 @@ export default function BookingModal() {
                   minDate={new Date()}
                   maxDate={addDays(new Date(), 3)}
                   placeholderText="Select a Time"
+                  filterTime={filterPassedTime}
                 />
               </GridItem>
 
@@ -326,6 +340,53 @@ export default function BookingModal() {
                 />
               </GridItem>
 
+              <GridItem>
+                <Stack direction="row">
+                  <Text
+                    className="font-thai"
+                    fontWeight="bold"
+                    textAlign="center"
+                  >
+                    ระยะเวลาทั้งหมด
+                  </Text>
+                  <Text fontWeight="bold" fontSize="sm">
+                    (Total duration):
+                  </Text>
+                </Stack>
+              </GridItem>
+
+              <GridItem>
+                <Stack direction="row">
+                  <Text fontWeight="bold" fontSize="md">
+                    {diffTime(formInput.datetimeUse, formInput.datetimeReturn)}
+                  </Text>
+                  <Text fontWeight="bold" fontSize="md" ps={2} textAlign="end">
+                    Hr.
+                  </Text>
+                </Stack>
+              </GridItem>
+
+              {diffTime(formInput.datetimeUse, formInput.datetimeReturn) > 9 ? (
+                <GridItem>
+                  <Stack direction="row">
+                    <Text fontWeight="bold" fontSize="sm" textColor="red">
+                      ***จองได้ไม่เกิน 9 ชั่วโมง/คน/วันเท่านั้น
+                    </Text>
+                  </Stack>
+                </GridItem>
+              ) : diffTime(formInput.datetimeUse, formInput.datetimeReturn) <
+                0 ? (
+                <GridItem>
+                  <Stack direction="row">
+                    <Text fontWeight="bold" fontSize="sm" textColor="red">
+                      ***กรุณาตรวจสอบเวลาให้ถูกต้อง
+                    </Text>
+                  </Stack>
+                </GridItem>
+              ) : (
+                ""
+              )}
+
               <GridItem colSpan={2}>
                 <Stack direction="row">
                   <Text
@@ -359,8 +420,10 @@ export default function BookingModal() {
               me={2}
               onClick={handleSubmit}
               isDisabled={
+                diffTime(formInput.datetimeUse, formInput.datetimeReturn) > 9 ||
+                diffTime(formInput.datetimeUse, formInput.datetimeReturn) < 0 ||
                 formInput.name == "" ||
-                formInput.code == "" ||
+                formInput.code.length != 7 ||
                 formInput.agent == "" ||
                 formInput.tel.length != 10 ||
                 formInput.cars == "" ||

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Icon, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import { FaCheckCircle, FaTimesCircle, FaMapPin } from "react-icons/fa";
 
@@ -12,6 +12,13 @@ export default function HistoryTab({ historyInfo }) {
       <Icon as={FaTimesCircle} color="red" boxSize={7} />
     );
   };
+
+  const dateTimeFormat = (info) => {
+    var dateSpilt = info.slice(0, 16).split(" ");
+    var date = dateSpilt[0].split("-").reverse().join("/");
+    return date + " " + dateSpilt[1];
+  };
+
   return (
     <>
       {/* Table */}
@@ -67,13 +74,13 @@ export default function HistoryTab({ historyInfo }) {
                     {info.name}
                   </Td>
                   <Td textAlign="center" isTruncated>
-                    {info.datetimeUse.slice(0, 16)}
+                    {dateTimeFormat(info.datetimeUse)}
                   </Td>
                   <Td textAlign="center" isTruncated>
-                    {info.datetimeReturn.slice(0, 16)}
+                    {dateTimeFormat(info.datetimeReturn)}
                   </Td>
                   <Td textAlign="center" isTruncated>
-                    {info.datetime.slice(0, 16)}
+                    {dateTimeFormat(info.datetime)}
                   </Td>
                   <Td textAlign="center">{actionButton(info)}</Td>
                 </Tr>

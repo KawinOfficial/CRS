@@ -68,7 +68,12 @@ export default function Login() {
             <Car />
             <Box bg="white" rounded="md" boxShadow={"lg"} p={2} m={0}>
               <Stack spacing={2} pb="5">
-                <Heading className="SNC" fontSize="6xl" textAlign="center">
+                <Heading
+                  className="SNC"
+                  fontSize="6xl"
+                  textAlign="center"
+                  textColor="red"
+                >
                   SNC
                 </Heading>
                 <Heading

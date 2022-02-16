@@ -41,13 +41,7 @@ export default function BookingModal() {
           cancelButtonColor: "red",
           html: `<p>ชื่อ-นามสกุล (Fullname):<b> ${data[0].name}</b></p>
         <p>หมายเลขรถ (Car license):<b> ${data[0].cars}</b></p>
-        <p>เวลาจอง (Datetime reserved):</p>
-        <p> <b>
-          ${data[0].datetimeUse.slice(0, 16)} - ${data[0].datetimeReturn.slice(
-            0,
-            16
-          )}
-        </b></p>`,
+       `,
         }).then((result) => {
           if (result.isConfirmed) {
             axios

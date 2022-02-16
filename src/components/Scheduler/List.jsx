@@ -3,6 +3,12 @@ import { Table, Thead, Tbody, Tr, Th, Td, Box } from "@chakra-ui/react";
 import { EditModal } from "../Modals";
 
 export default function List({ information }) {
+  const dateTimeFormat = (info) => {
+    var dateSpilt = info.slice(0, 16).split(" ");
+    var date = dateSpilt[0].split("-").reverse().join("/");
+    return date + " " + dateSpilt[1];
+  };
+
   return (
     <>
       {/* Table */}
@@ -49,10 +55,10 @@ export default function List({ information }) {
                     {info.name}
                   </Td>
                   <Td textAlign="center" isTruncated>
-                    {info.datetimeUse.slice(0, 16)}
+                    {dateTimeFormat(info.datetimeUse)}
                   </Td>
                   <Td textAlign="center" isTruncated>
-                    {info.datetimeReturn.slice(0, 16)}
+                    {dateTimeFormat(info.datetimeReturn)}
                   </Td>
                   <Td textAlign="center">
                     <EditModal info={info} />

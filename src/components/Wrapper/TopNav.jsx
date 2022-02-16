@@ -17,6 +17,8 @@ import {
 import { FaSignOutAlt } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { TermOfUsed } from "../Modals";
+import SNC from "../../img/logo.png";
 
 export default function TopNav({ page }) {
   const navigate = useNavigate();
@@ -41,18 +43,21 @@ export default function TopNav({ page }) {
   return (
     <>
       <Flex color="white" alignItems="center">
-        <Heading className="SNC" px={2} fontSize="4xl">
-          {/* <Image src="../../img/logo.png" /> */}
-          <Link onClick={() => navigate("/Scheduler")}>SNC</Link>
-        </Heading>
+        <Link onClick={() => navigate("/Scheduler")}>
+          {/* <Image src={SNC} w={{ md: "6vw", base: "15vw" }} /> */}
+          <Heading className="SNC" fontSize="3xl" textColor="red" px={2}>
+            SNC
+          </Heading>
+        </Link>
         <Spacer />
-        <Text fontSize="lg">Car Reservation Service (CRS)</Text>
+        <Text fontSize="lg">Car Reservation Service</Text>
         <Spacer />
         <Box pe="2">
           <Stack direction="row">
             {/* Button */}
-            <Tooltip label={page ? "Log in" : "Log out"}>
-              <Button px="3" bg="none" onClick={handleSignOut}>
+            {page ? <TermOfUsed /> : ""}
+            <Tooltip hasArrow label={page ? "Log in" : "Log out"}>
+              <Button bg="none" onClick={handleSignOut}>
                 <Icon as={FaSignOutAlt} />
               </Button>
             </Tooltip>
