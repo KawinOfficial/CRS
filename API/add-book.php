@@ -21,7 +21,7 @@
             $resultTotalBooking[] = $row;
         }
         $totalBooking -> closeCursor();
-        $msgLineNotify = "\n"."รถทะเบียน ". $cars . "\n" . "วันที่ " . $dateUse . "\n";
+        $msgLineNotify = "\n"."รถทะเบียน ". $cars . "\n"  . "วันที่ " . (new DateTime($dateUse))->format('d/m/Y') . "\n" . "*คิวจองรถ*" . "\n" ;
         $i = 0;
         while($i < count($resultTotalBooking)){
             $timeStart = $resultTotalBooking[$i] -> datetimeUse;
@@ -29,6 +29,8 @@
             $msgLineNotify .= substr($timeStart,10,6) ." -". substr($timeEnd,10,6) . " น." .  "\n";
             $i++;
         }
+
+        $msgLineNotify .= "http://10.1.8.253:80/crs";
 
         return $msgLineNotify;                    
     }

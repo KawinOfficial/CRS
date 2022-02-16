@@ -15,12 +15,13 @@
                             AND (datetimeUse BETWEEN '$dateUse 00:00:00' AND '$dateUse 23:59:59') ORDER BY datetimeUse ASC;";
         
         $totalBooking = $conn -> query($sqlLineNotify);
+        
         $resultTotalBooking = array();
         while($row = $totalBooking->fetchObject()){
             $resultTotalBooking[] = $row;
         }
-        
-        $msgLineNotify = "\n"."รถทะเบียน ". $cars . "\n" . "วันที่ " . $dateUse . "\n";
+        $totalBooking -> closeCursor();
+        $msgLineNotify = "\n"."รถทะเบียน ". $cars . "\n"  . "วันที่ " . (new DateTime($dateUse))->format('d/m/Y') . "\n" . "*คิวจองรถ*" . "\n" ;
         $i = 0;
         while($i < count($resultTotalBooking)){
             $timeStart = $resultTotalBooking[$i] -> datetimeUse;
@@ -29,7 +30,8 @@
             $i++;
         }
 
-        $totalBooking -> closeCursor();
+        $msgLineNotify .= "http://10.1.8.253:80/crs";
+
         return $msgLineNotify;                    
     }
 
