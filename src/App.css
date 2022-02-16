@@ -1,0 +1,29 @@
+* {
+  font-family: "Fira Sans", sans-serif;
+}
+
+.font-thai {
+  font-family: "Noto Serif Thai", serif;
+}
+
+.SNC {
+  font-family: "lilyUPC";
+  src: url("./components/font/LilyUPC_Bold.ttf");
+  font-style: italic;
+  color: red;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
