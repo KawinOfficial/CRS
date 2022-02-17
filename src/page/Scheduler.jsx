@@ -18,7 +18,6 @@ import {
 import React, { useEffect, useState } from "react";
 import Loading from "../components/lottie/Loading";
 import { List, Schedule } from "../components/Scheduler";
-import { FaSearch } from "react-icons/fa";
 
 import { BookingModal, CancelModal } from "../components/Modals";
 import axios from "axios";
@@ -85,10 +84,8 @@ export default function Scheduler() {
                   <Schedule information={information} />
                   {/* Action */}
                   <Stack direction="row" p={2} justifyContent="center">
-                    {/* Booking */}
                     <BookingModal />
-                    {/* Canceling */}
-                    <CancelModal />
+                    <CancelModal information={information} />
                   </Stack>
                 </Box>
               </Center>
@@ -125,18 +122,9 @@ export default function Scheduler() {
                   boxShadow="sm"
                   p={1}
                 >
-                  {/* Search
-                  <Stack direction="row">
-                    <InputGroup w={{ md: "30%", base: "100%" }}>
-                      <InputLeftElement
-                        pointerEvents={"none"}
-                        children={<Icon as={FaSearch} color={"gray.500"} />}
-                      />
-                      <Input id="Search" placeholder="Search..." />
-                    </InputGroup>
-                    <Button>Search</Button>
-                  </Stack> */}
-                  <List information={information} />
+                  <Box overflow="auto" h={{ base: "75vh", md: "69vh" }}>
+                    <List information={information} />
+                  </Box>
                 </Box>
               </Center>
             </AccordionPanel>

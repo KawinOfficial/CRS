@@ -71,6 +71,7 @@ export default function BookingModal({ formInput }) {
         leftIcon={<Icon as={FaCheckCircle} />}
         me={2}
         onClick={onOpen}
+        rounded="3xl"
       >
         Confirm
       </Button>
@@ -138,6 +139,7 @@ export default function BookingModal({ formInput }) {
               me={2}
               onClick={handleSubmit}
               disabled={ID == ""}
+              rounded="3xl"
             >
               Confirm
             </Button>
@@ -145,6 +147,7 @@ export default function BookingModal({ formInput }) {
               onClick={onClose}
               colorScheme="red"
               leftIcon={<Icon as={FaTimesCircle} />}
+              rounded="3xl"
             >
               Cancel
             </Button>

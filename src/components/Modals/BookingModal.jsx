@@ -49,7 +49,6 @@ export default function BookingModal() {
     formInput.datetimeReturn = fdatetime(datetimeReturn).getFDatetime;
 
     axios.post(urlPath, { ...formInput }).then(({ data: { state } }) => {
-      handleClose();
       if (state) {
         Swal.fire({
           title: "จองสำเร็จ (Booking success.)",
@@ -68,6 +67,7 @@ export default function BookingModal() {
         });
       }
     });
+    handleClose();
   };
 
   const handleClose = () => {
@@ -153,10 +153,10 @@ export default function BookingModal() {
                     fontWeight="bold"
                     textAlign="center"
                   >
-                    ชื่อ-นามสกุล
+                    ชื่อผู้จอง
                   </Text>
                   <Text fontWeight="bold" fontSize="sm">
-                    (Fullname)
+                    (Booking by)
                   </Text>
                 </Stack>
                 <Input
@@ -208,14 +208,19 @@ export default function BookingModal() {
                     (Organization)
                   </Text>
                 </Stack>
-                <Input
-                  placeholder="Organization"
+                <Select
+                  placeholder="Select organization"
                   size="md"
                   variant="flushed"
                   onChange={({ target: { value: agent } }) =>
                     setFormInput({ ...formInput, agent })
                   }
-                />
+                >
+                  <option value="SPEC">SPEC</option>
+                  <option value="SCAN">SCAN</option>
+                  <option value="IPC">IPC</option>
+                  <option value="Other">Other</option>
+                </Select>
               </GridItem>
 
               <GridItem>
@@ -431,6 +436,7 @@ export default function BookingModal() {
                 formInput.datetimeReturn == "" ||
                 formInput.purpose == ""
               }
+              rounded="3xl"
             >
               Confirm
             </Button>
@@ -438,6 +444,7 @@ export default function BookingModal() {
               onClick={handleClose}
               colorScheme="red"
               leftIcon={<Icon as={FaTimesCircle} />}
+              rounded="3xl"
             >
               Cancel
             </Button>
