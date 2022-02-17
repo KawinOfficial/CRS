@@ -6,10 +6,8 @@
     $dataJson = file_get_contents("php://input");
     $data = json_decode($dataJson);
 
-    define('LINE_API', "https://notify-api.line.me/api/notify");
-    $token = "W45sITRYLycIELNhECWiKjUpn5Z7meIVilOXB8T0K5q";
 
-    function msg_line_notify($datetime, $cars, $conn){
+    function msg_line_notify($datetime, $cars, $conn ){
         $dateUse = substr($datetime,0,10);
         $sqlLineNotify = "SELECT*FROM t_cars WHERE cars = '$cars' 
                             AND (datetimeUse BETWEEN '$dateUse 00:00:00' AND '$dateUse 23:59:59') ORDER BY datetimeUse ASC;";
@@ -21,16 +19,16 @@
             $resultTotalBooking[] = $row;
         }
         $totalBooking -> closeCursor();
-        $msgLineNotify = "\n"."รถทะเบียน ". $cars . "\n"  . "วันที่ " . (new DateTime($dateUse))->format('d/m/Y') . "\n" . "*คิวจองรถ*" . "\n" ;
+        $msgLineNotify = "\n"."*รถทะเบียน* ". $cars . "\n"  . "*วันที่* " . (new DateTime($dateUse))->format('d/m/Y') . "\n" . "*คิวจองรถ*" . "\n" ;
         $i = 0;
         while($i < count($resultTotalBooking)){
             $timeStart = $resultTotalBooking[$i] -> datetimeUse;
             $timeEnd = $resultTotalBooking[$i] -> datetimeReturn;
-            $msgLineNotify .= substr($timeStart,10,6) ." -". substr($timeEnd,10,6) . " น." .  "\n";
+            $msgLineNotify .= substr($timeStart,11,5) ." -". substr($timeEnd,11,5) . " น." .  "\n";
             $i++;
         }
 
-        $msgLineNotify .= "http://10.1.8.253:80/crs";
+        $msgLineNotify .= webUrl;
 
         return $msgLineNotify;                    
     }

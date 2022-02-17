@@ -6,8 +6,6 @@
     $dataJson = file_get_contents("php://input");
     $data = json_decode($dataJson);
 
-    define('LINE_API', "https://notify-api.line.me/api/notify");
-    $token = "W45sITRYLycIELNhECWiKjUpn5Z7meIVilOXB8T0K5q";
 
     function msg_line_notify($datetime, $cars, $conn){
         $dateUse = substr($datetime,0,10);
@@ -21,16 +19,16 @@
             $resultTotalBooking[] = $row;
         }
         $totalBooking -> closeCursor();
-        $msgLineNotify = "\n"."รถทะเบียน ". $cars . "\n"  . "วันที่ " . (new DateTime($dateUse))->format('d/m/Y') . "\n" . "*คิวจองรถ*" . "\n" ;
+        $msgLineNotify = "\n"."*รถทะเบียน* ". $cars . "\n"  . "*วันที่* " . (new DateTime($dateUse))->format('d/m/Y') . "\n" . "*คิวจองรถ*" . "\n" ;
         $i = 0;
         while($i < count($resultTotalBooking)){
             $timeStart = $resultTotalBooking[$i] -> datetimeUse;
             $timeEnd = $resultTotalBooking[$i] -> datetimeReturn;
-            $msgLineNotify .= substr($timeStart,10,6) ." -". substr($timeEnd,10,6) . " น." .  "\n";
+            $msgLineNotify .= substr($timeStart,11,5) ." -". substr($timeEnd,11,5) . " น." .  "\n";
             $i++;
         }
 
-        $msgLineNotify .= "http://10.1.8.253:80/crs";
+        $msgLineNotify .= webUrl;
 
         return $msgLineNotify;                    
     }
@@ -53,6 +51,32 @@
         return $res;
     }
 
+    function check_time($datetimeUse, $datetimeReturn, $code, $conn){
+        $timeUseBook = date_create(substr($datetimeUse,11,5));
+        $timeReturnBook = date_create(substr($datetimeReturn,11,5));
+        $diffTimeBook = (date_diff($timeUseBook, $timeReturnBook)->h*60)+(date_diff($timeUseBook, $timeReturnBook)->i);
+
+        $date = substr($datetimeUse,0,10);
+        $sql = "SELECT*FROM t_cars WHERE code = '$code' AND ((datetimeUse BETWEEN '$date 00:00:00' AND '$date 23:59:59') OR (datetimeReturn BETWEEN '$date 00:00:00' AND '$date 23:59:59')) ;";
+        $result = $conn->query($sql);
+        $allTime = array();
+        while($row = $result->fetchObject()){
+            $allTime[] = $row;
+        }
+
+        $i = 0;
+        $diffTimeDB = 0;
+        while($i < count($allTime)){
+            $timeUse = date_create(substr($allTime[$i]->datetimeUse,11,5));
+            $timeRetur = date_create(substr($allTime[$i]->datetimeReturn,11,5));
+            $diffTimeDB = $diffTimeDB + (date_diff($timeUse, $timeRetur)->h*60)+(date_diff($timeUse, $timeRetur)->i);
+            $i++;
+        }
+
+        $result -> closeCursor();
+        return $diffTimeBook + $diffTimeDB;
+    }
+
     if($requestMethod == "POST"){
         if(!empty($data)){
             $cars = $data -> cars;
@@ -68,8 +92,8 @@
             $parking = "-";	
 
             $sqlChk = "SELECT*FROM t_cars 
-                        WHERE cars = '$cars' AND ((datetimeUse <= '$datetimeUse' AND datetimeReturn > '$datetimeUse') 
-                        OR (datetimeUse < '$datetimeReturn' AND datetimeReturn >= '$datetimeReturn'));";
+                        WHERE (cars = '$cars' AND ((datetimeUse <= '$datetimeUse' AND datetimeReturn > '$datetimeUse') OR (datetimeUse < '$datetimeReturn' AND datetimeReturn >= '$datetimeReturn') OR (datetimeUse >= '$datetimeUse' AND datetimeReturn <= '$datetimeReturn')))
+                        OR ((datetimeUse <= '$datetimeUse' AND datetimeReturn > '$datetimeUse' AND code = '$code') OR (datetimeUse < '$datetimeReturn' AND datetimeReturn >= '$datetimeReturn' AND code = '$code') OR (datetimeUse >= '$datetimeUse' AND datetimeReturn <= '$datetimeReturn' AND code = '$code'));";
 
             $sqlInsert = "INSERT INTO t_cars (cars,name,code,agent,tel,datetime,datetimeUse,datetimeReturn,purpose) 
                             VALUES ('$cars','$name','$code','$agent','$tel','$datetime','$datetimeUse','$datetimeReturn','$purpose');
@@ -78,8 +102,10 @@
                             VALUES ('$cars','$name','$code','$agent','$tel','$datetime','$datetimeUse','$datetimeReturn','$purpose','$action','$parking');";
 
             $checkBooking = $conn -> query($sqlChk);
+
+            $timeTotal = check_time($datetimeUse, $datetimeReturn, $code, $conn);
             
-            if ($checkBooking -> rowCount() == 0) {
+            if ($checkBooking -> rowCount() == 0 && $timeTotal <= 540) {
                 $checkBooking -> closeCursor();
                 $result = $conn -> query($sqlInsert);
                 if($result -> rowCount() > 0){
@@ -93,7 +119,7 @@
                     // http_response_code(400);
                 }
             }else{
-                echo json_encode(['message' => 'Error', 'state' => false]);
+                echo json_encode(['message' => 'busy or over9h', 'state' => false]);
                 // http_response_code(400);
             }
 
