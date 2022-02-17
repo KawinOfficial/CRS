@@ -7,7 +7,7 @@
     $data = json_decode($dataJson);
 
 
-    function msg_line_notify($datetime, $cars, $conn ){
+    function msg_line_notify($datetime, $cars, $conn){
         $dateUse = substr($datetime,0,10);
         $sqlLineNotify = "SELECT*FROM t_cars WHERE cars = '$cars' 
                             AND (datetimeUse BETWEEN '$dateUse 00:00:00' AND '$dateUse 23:59:59') ORDER BY datetimeUse ASC;";
@@ -19,7 +19,7 @@
             $resultTotalBooking[] = $row;
         }
         $totalBooking -> closeCursor();
-        $msgLineNotify = "\n"."*รถทะเบียน* ". $cars . "\n"  . "*วันที่* " . (new DateTime($dateUse))->format('d/m/Y') . "\n" . "*คิวจองรถ*" . "\n" ;
+        $msgLineNotify = "\n"."*รถทะเบียน* ". $cars . "\n"  . "*วันที่* " . (new DateTime($dateUse))->format('d/m/Y') . "\n\n" . "*คิวจองรถ*" . "\n" ;
         $i = 0;
         while($i < count($resultTotalBooking)){
             $timeStart = $resultTotalBooking[$i] -> datetimeUse;
@@ -28,7 +28,7 @@
             $i++;
         }
 
-        $msgLineNotify .= webUrl;
+        $msgLineNotify .= "\n". "*ต้องการจองรถ* >>". "\n" . webUrl;
 
         return $msgLineNotify;                    
     }
