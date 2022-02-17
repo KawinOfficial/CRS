@@ -48,25 +48,32 @@ export default function BookingModal() {
     formInput.datetimeUse = fdatetime(datetimeUse).getFDatetime;
     formInput.datetimeReturn = fdatetime(datetimeReturn).getFDatetime;
 
-    axios.post(urlPath, { ...formInput }).then(({ data: { state } }) => {
-      if (state) {
-        Swal.fire({
-          title: "จองสำเร็จ (Booking success.)",
-          icon: "success",
-          timer: 1500,
-          showConfirmButton: false,
-        });
-      } else {
-        toast({
-          title: "จองไม่สำเร็จ (Booking error.)",
-          description:
-            "กรุณาตรวจสอบช่วงเวลาว่างของรถ (Please check the availability of the car.)",
-          status: "error",
-          isClosable: true,
-          position: "top-right",
-        });
-      }
-    });
+    axios
+      .post(urlPath, { ...formInput })
+      .then(({ data: { message, state } }) => {
+        console.log(message, state);
+        if (state) {
+          Swal.fire({
+            title: "จองสำเร็จ (Booking success.)",
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+        } else {
+          toast({
+            title: "จองไม่สำเร็จ (Booking error.)",
+            description: `${
+              message != "Error"
+                ? "จองได้วันละไม่เกิน 9 ชม.เท่านั้น (Only 9 hours per day can be reserved.)"
+                : "กรุณาตรวจสอบช่วงเวลาว่างของรถ (Please check the availability of the car.)"
+            }`,
+            // description: `${message}`,
+            status: "error",
+            isClosable: true,
+            position: "top-right",
+          });
+        }
+      });
     handleClose();
   };
 
