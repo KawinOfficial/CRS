@@ -64,6 +64,7 @@ export default function MyCalendar({ information }) {
             return { style: { backgroundColor } };
           }}
           views={["month", "week", "day"]}
+          defaultView={"week"}
         />
       </div>
     </>

@@ -12,6 +12,7 @@ import {
   useDisclosure,
   Icon,
   Tooltip,
+  HStack,
 } from "@chakra-ui/react";
 
 import { FaBookOpen } from "react-icons/fa";
@@ -62,31 +63,48 @@ export default function TermOfUsed() {
               <Text className="font-thai" fontWeight="bold" fontSize="md">
                 การใช้งาน
               </Text>
+
               <Text className="font-thai" fontSize="sm">
                 1. ผู้ใช้งานลงทะเบียนเพื่อ เช็คคิวรถ / จองคิวรถ / ยกเลิกคิวรถ
                 ได้ที่เว็บไซต์นี้เท่านั้น
               </Text>
+
               <Text className="font-thai" fontSize="sm">
                 2. ผู้ใช้งาน สามารถจองคิวรถ
                 <b className="font-thai">ล่วงหน้าได้ ไม่เกิน 3 วัน</b>
               </Text>
+
               <Text className="font-thai" fontSize="sm">
                 3. ผู้ใช้งาน สามารถจองคิวรถได้
                 <b className="font-thai">รวมแล้วไม่เกิน 9 ชั่วโมง/วัน</b>
               </Text>
+
               <Text className="font-thai" fontSize="sm">
                 4. ผู้ใช้งาน ต้อง
                 <b className="font-thai">มีใบอนุญาตขับขี่รถยนต์</b>
                 ตามที่กฎหมายกำหนด
               </Text>
-              <Text className="font-thai" fontSize="sm">
-                5. <b className="font-thai">ก่อนใช้รถยนต์</b>
-                ติดต่อรับกุญแจได้ที่แผนก HR
-              </Text>
-              <Text className="font-thai" fontSize="sm">
-                6. <b className="font-thai">หลังใช้รถยนต์</b>
-                จอดรถที่บริเวณลานจอด ซอย 13 และคืนกุญแจให้กับ HR
-              </Text>
+
+              <HStack fontSize="sm">
+                <Text className="font-thai">5. </Text>
+                <Text className="font-thai" fontWeight="bold" textColor="blue">
+                  ก่อนใช้รถยนต์
+                </Text>
+                <Text className="font-thai" fontSize="sm">
+                  ติดต่อรับกุญแจได้ที่แผนก HR
+                </Text>
+              </HStack>
+
+              <HStack fontSize="sm">
+                <Text className="font-thai">6. </Text>
+                <Text className="font-thai" fontWeight="bold" textColor="blue">
+                  หลังใช้รถยนต์
+                </Text>
+                <Text className="font-thai" fontSize="sm">
+                  จอดรถที่บริเวณลานจอด ซอย 13 และคืนกุญแจให้กับ HR
+                </Text>
+              </HStack>
+
               <Text className="font-thai" fontSize="sm">
                 7. ผู้ใช้งาน
                 <b className="font-thai">
@@ -96,16 +114,19 @@ export default function TermOfUsed() {
                 กรณีเกิดเหตุสุดวิสัยต้องแจ้งทาง HR
                 ทราบเพื่อประสานงานกับผู้จองคิวในช่วงเวลาถัดไป
               </Text>
+
               <Text className="font-thai" fontSize="sm">
                 8. กรณีที่ผู้ใช้งาน
                 <b className="font-thai"> ไม่ติดต่อรับกุญแจภายใน 1 ชั่วโมง</b>
                 นับจากเวลาที่จองคิวไว้
                 ขอสงวนสิทธิในการยกเลิกคิวจองตามการพิจารณาของ HR
               </Text>
+
               <Text className="font-thai" fontSize="sm">
                 9.พบปัญหาการใช้งาน หรือมีเหตุฉุกเฉิน ติดต่อ HR เบอร์โทรศัพท์
                 038-026-750
               </Text>
+
               <Text className="font-thai" fontWeight="bold" fontSize="sm">
                 การเข้าใช้งานเว็บไซต์
               </Text>

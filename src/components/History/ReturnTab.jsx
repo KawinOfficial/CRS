@@ -125,6 +125,7 @@ export default function ReturnTab({ information }) {
                         size="sm"
                         ms={2}
                         onClick={() => handleSubmit(info)}
+                        rounded="3xl"
                       >
                         <Icon as={FaTimesCircle} />
                       </Button>

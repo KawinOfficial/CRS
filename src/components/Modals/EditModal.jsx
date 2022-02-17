@@ -15,6 +15,7 @@ import {
   GridItem,
   Input,
   Tooltip,
+  Select,
 } from "@chakra-ui/react";
 
 import { FaTimesCircle } from "react-icons/fa";
@@ -39,7 +40,7 @@ export default function EditModal({ info }) {
   return (
     <>
       <Tooltip hasArrow label="Edit" placement="top">
-        <Button onClick={onOpen} colorScheme="yellow" size="sm">
+        <Button onClick={onOpen} colorScheme="yellow" size="sm" rounded="3xl">
           <Icon as={FaUserEdit} />
         </Button>
       </Tooltip>
@@ -80,10 +81,10 @@ export default function EditModal({ info }) {
                     fontWeight="bold"
                     textAlign="center"
                   >
-                    ชื่อ-นามสกุล
+                    ชื่อผู้จอง
                   </Text>
                   <Text fontWeight="bold" fontSize="sm">
-                    (Fullname)
+                    (Booking by)
                   </Text>
                 </Stack>
                 <Input
@@ -109,14 +110,20 @@ export default function EditModal({ info }) {
                     (Organization)
                   </Text>
                 </Stack>
-                <Input
-                  placeholder="Organization"
+                <Select
+                  placeholder="Select organization"
                   size="md"
+                  variant="flushed"
                   defaultValue={formInput?.agent}
                   onChange={({ target: { value: agent } }) =>
                     setFormInput({ ...formInput, agent })
                   }
-                />
+                >
+                  <option value="SPEC">SPEC</option>
+                  <option value="SCAN">SCAN</option>
+                  <option value="IPC">IPC</option>
+                  <option value="Other">Other</option>
+                </Select>
               </GridItem>
 
               <GridItem>
@@ -239,6 +246,7 @@ export default function EditModal({ info }) {
               onClick={handleClose}
               colorScheme="red"
               leftIcon={<Icon as={FaTimesCircle} />}
+              rounded="3xl"
             >
               Cancel
             </Button>

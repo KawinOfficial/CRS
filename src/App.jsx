@@ -15,9 +15,10 @@ export default function App() {
     <>
       <AnimatePresence exitBeforeEnter>
         <Routes location={location} key={location.pathname}>
-          <Route exact path="/" element={<Login />} />
+          <Route path="/Login" element={<Login />} />
           <Route
-            path="/Scheduler"
+            exact
+            path="/"
             element={<ContentWrapper content={Scheduler} page={true} />}
           />
           <Route

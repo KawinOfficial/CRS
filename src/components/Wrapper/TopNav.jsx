@@ -28,7 +28,7 @@ export default function TopNav({ page }) {
     e.preventDefault();
     axios.post(urlPath).then(({ data: { state } }) => {
       if (state) {
-        navigate("/");
+        navigate("/Login");
       } else {
         Swal.fire({
           icon: "error",
@@ -43,7 +43,7 @@ export default function TopNav({ page }) {
   return (
     <>
       <Flex color="white" alignItems="center">
-        <Link onClick={() => navigate("/Scheduler")}>
+        <Link onClick={() => navigate("/")}>
           {/* <Image src={SNC} w={{ md: "6vw", base: "15vw" }} /> */}
           <Heading className="SNC" fontSize="3xl" textColor="red" px={2}>
             SNC

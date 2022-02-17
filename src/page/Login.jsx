@@ -120,7 +120,7 @@ export default function Login() {
                     </InputGroup>
                     <Box textAlign="center" pt="8">
                       <Button
-                        onClick={() => navigate("/Scheduler")}
+                        onClick={() => navigate("/")}
                         type="submit"
                         colorScheme="messenger"
                         leftIcon={<Icon as={FaCaretLeft} />}
