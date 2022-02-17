@@ -65,7 +65,7 @@
             $action = $data -> action;
             $parking = $data -> parking;
 
-            if(new DateTime() > new DateTime($datetimeUse)){
+            if(((new DateTime() > new DateTime($datetimeUse) && $action == "returned" ) ) || $action == "cancel"){
                 $sql = "DELETE FROM t_cars WHERE code = '$code' AND datetimeUse = '$datetimeUse';
                     INSERT INTO t_cars_logger (cars,name,code,agent,tel,datetime,datetimeUse,datetimeReturn,purpose,action,parking) 
                     VALUES ('$cars','$name','$code','$agent','$tel','$datetime','$datetimeUse','$datetimeReturn','$purpose','$action', '$parking');";
