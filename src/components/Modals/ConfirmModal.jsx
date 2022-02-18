@@ -20,12 +20,12 @@ import {
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 
 import axios from "axios";
+const urlPath = "http://10.1.8.253:80/CRS/API/edit-book.php";
 
 export default function BookingModal({ formInput }) {
   const [ID, setID] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const urlPath = "http://10.1.8.253:80/CRS/API/edit-book.php";
 
   const handleSubmit = () => {
     // console.log(formInput);
@@ -34,6 +34,7 @@ export default function BookingModal({ formInput }) {
       axios
         .post(urlPath, { ...formInput })
         .then(({ data: { state } }) => {
+          // console.log(data);
           if (state) {
             toast({
               title: "แก้ไขสำเร็จ (Edit success.)",

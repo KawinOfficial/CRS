@@ -154,7 +154,7 @@ export default function TermOfUsed() {
 
               <Text className="font-thai" fontSize="sm">
                 9.พบปัญหาการใช้งาน หรือมีเหตุฉุกเฉิน ติดต่อ HR เบอร์โทรศัพท์
-                038-026-750
+                <span className="font-thai font-term"> 038-026-750</span>
                 {/* <span fontSize="small">
                   {" "}
                   (Encountered a problem in use or if there is an emergency,

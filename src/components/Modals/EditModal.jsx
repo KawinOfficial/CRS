@@ -30,6 +30,9 @@ export default function EditModal({ info }) {
     agent: info.agent,
     tel: info.tel,
     purpose: info.purpose,
+    cars: info.cars,
+    datetimeUse: info.datetimeUse,
+    datetimeReturn: info.datetimeReturn,
   });
   const { isOpen, onOpen, onClose } = useDisclosure();
 
