@@ -12,7 +12,12 @@
 
         $carsStatus = array();
         while($row = $result-> fetchObject()){
-            $carsStatus[] = ["cars" => $row -> cars, "status" => new DateTime($row -> blockEnd ) < new DateTime() ? true : false] ;
+            $carsStatus[] = [
+                "cars" => $row -> cars, 
+                "status" => new DateTime($row -> blockEnd) < new DateTime() ? true : false,
+                "note" => $row -> note,
+                "blockEnd" => $row -> blockEnd
+                ];
         }
 
         echo json_encode($carsStatus);
