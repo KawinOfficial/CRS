@@ -12,9 +12,11 @@ import {
   Button,
   FormControl,
   FormLabel,
+  Image,
 } from "@chakra-ui/react";
 import { FaSignInAlt, FaUserAlt, FaLock, FaCaretLeft } from "react-icons/fa";
 import Car from "../components/lottie/Car";
+import SNC from "../components/Wrapper/logo.png";
 
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -68,22 +70,22 @@ export default function Login() {
             <Car />
             <Box bg="white" rounded="md" boxShadow={"lg"} p={2} m={0}>
               <Stack spacing={2} pb="5">
-                <Heading
-                  className="SNC"
-                  fontSize="6xl"
-                  textAlign="center"
-                  textColor="red"
-                >
-                  SNC
-                </Heading>
-                <Heading
-                  fontSize="3xl"
-                  bgGradient="linear(to-l, #b92b27, #1565C0)"
-                  bgClip="text"
-                  px={2}
-                >
-                  Car Reservation Service
-                </Heading>
+                <VStack>
+                  <Image
+                    srcSet={SNC}
+                    w={{ md: "12vw", base: "35vw" }}
+                    fallbackSrc="http://10.1.8.253/crs/assets/logo.63ae820a.png"
+                  />
+
+                  <Heading
+                    fontSize="3xl"
+                    bgGradient="linear(to-l, #b92b27, #1565C0)"
+                    bgClip="text"
+                    px={2}
+                  >
+                    Car Reservation Service
+                  </Heading>
+                </VStack>
 
                 <VStack pt={5}>
                   <FormControl isRequired w="75%" onSubmit={handleSubmit}>

@@ -18,7 +18,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { TermOfUsed } from "../Modals";
-import SNC from "../../img/logo.png";
+import SNC from "./logo.png";
 
 export default function TopNav({ page }) {
   const navigate = useNavigate();
@@ -44,10 +44,11 @@ export default function TopNav({ page }) {
     <>
       <Flex color="white" alignItems="center">
         <Link onClick={() => navigate("/")}>
-          {/* <Image src={SNC} w={{ md: "6vw", base: "15vw" }} /> */}
-          <Heading className="SNC" fontSize="3xl" textColor="red" px={2}>
-            SNC
-          </Heading>
+          <Image
+            srcSet={SNC}
+            w={{ md: "5vw", base: "15vw" }}
+            fallbackSrc="http://10.1.8.253/crs/assets/logo.63ae820a.png"
+          />
         </Link>
         <Spacer />
         <Text fontSize="lg">Car Reservation Service</Text>

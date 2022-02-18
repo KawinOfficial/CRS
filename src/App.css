@@ -6,6 +6,11 @@
   font-family: "Noto Serif Thai", serif;
 }
 
+.font-term {
+  font-weight: bold;
+  color: blue;
+}
+
 .SNC {
   font-family: "lilyUPC";
   src: url("./components/font/LilyUPC_Bold.ttf");
