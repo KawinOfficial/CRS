@@ -19,19 +19,18 @@ import { FaSearch } from "react-icons/fa";
 import Loading from "../components/lottie/Loading";
 import { HistoryTab, ReturnTab } from "../components/History";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const urlPath = "http://10.1.8.253:80/CRS/API/history.php";
-const urlChk = "http://10.1.8.253:80/CRS/API/check-book.php";
-const urlAuthen = "http://10.1.8.253:80/CRS/API/authen.php";
+const urlPath = "http://10.1.8.253:80/crs/API/history.php";
+const urlChk = "http://10.1.8.253:80/crs/API/check-book.php";
+const urlAuthen = "http://10.1.8.253:80/crs/API/authen.php";
 
 export default function History() {
-  const { state } = useLocation();
   const navigate = useNavigate();
   const [historyInfo, setHistoryInfo] = useState();
   const [information, setInformation] = useState();
   const [search, setSearch] = useState("");
-  // console.log(state);
+
   const getHistory = () => {
     console.log(search);
     axios.post(urlPath, { search: search }).then(({ data }) => {
@@ -42,9 +41,12 @@ export default function History() {
     axios.post(urlChk, { code: "" }).then(({ data }) => {
       setInformation(data);
     });
-    // axios.get(urlAuthen).then(({ data }) => {
-    //   console.log(data);
-    // });
+    axios.get(urlAuthen).then(({ data: { state } }) => {
+      // console.log(state);
+      if (!state) {
+        navigate("/Login");
+      }
+    });
   };
 
   useEffect(() => {

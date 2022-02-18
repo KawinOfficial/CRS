@@ -21,10 +21,10 @@ import { List, Schedule } from "../components/Scheduler";
 
 import { BookingModal, CancelModal } from "../components/Modals";
 import axios from "axios";
+const urlPath = "http://10.1.8.253:80/crs/API/check-book.php";
 
 export default function Scheduler() {
   const [information, setInformation] = useState();
-  const urlPath = "http://10.1.8.253:80/CRS/API/check-book.php";
 
   const getTable = () => {
     axios.post(urlPath, { code: "" }).then(({ data }) => {

@@ -67,7 +67,6 @@ export default function BookingModal() {
                 ? "จองได้วันละไม่เกิน 9 ชม.เท่านั้น (Only 9 hours per day can be reserved.)"
                 : "กรุณาตรวจสอบช่วงเวลาว่างของรถ (Please check the availability of the car.)"
             }`,
-            // description: `${message}`,
             status: "error",
             isClosable: true,
             position: "top-right",

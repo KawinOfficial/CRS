@@ -20,11 +20,11 @@ import SNC from "../components/Wrapper/logo.png";
 
 import Swal from "sweetalert2";
 import axios from "axios";
+const urlPath = "http://10.1.8.253:80/crs/API/login.php";
 
 export default function Login() {
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
   const navigate = useNavigate();
-  const urlPath = "http://10.1.8.253:80/CRS/API/login.php";
 
   const handleSubmit = (e) => {
     e.preventDefault();

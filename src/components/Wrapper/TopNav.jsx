@@ -19,10 +19,10 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { TermOfUsed } from "../Modals";
 import SNC from "./logo.png";
+const urlPath = "http://10.1.8.253:80/crs/API/logout.php";
 
 export default function TopNav({ page }) {
   const navigate = useNavigate();
-  const urlPath = "http://10.1.8.253:80/CRS/API/logout.php";
 
   const handleSignOut = (e) => {
     e.preventDefault();
