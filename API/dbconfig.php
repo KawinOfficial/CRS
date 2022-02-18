@@ -12,5 +12,6 @@ $password = "";
 
 define('LINE_API', "https://notify-api.line.me/api/notify");
 define('webUrl', "http://10.1.8.253:80/crs");
-$token = "W45sITRYLycIELNhECWiKjUpn5Z7meIVilOXB8T0K5q";
+// $token = "W45sITRYLycIELNhECWiKjUpn5Z7meIVilOXB8T0K5q";
+$token = "lmZADgjhFWsApkex5W4JAeljXxpEe0VlcrtrbuqzaoW";
 ?>
