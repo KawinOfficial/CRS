@@ -105,27 +105,32 @@
 
             $timeTotal = check_time($datetimeUse, $datetimeReturn, $code, $conn);
             
-            if ($checkBooking -> rowCount() == 0 && $timeTotal <= 540) {
-                $checkBooking -> closeCursor();
-                $result = $conn -> query($sqlInsert);
-                if($result -> rowCount() > 0){
-                    $result -> closeCursor();
-                    $msg = msg_line_notify($datetimeUse, $cars, $conn);
-                    notify_message($msg, $token);
-                    echo json_encode(['message' => 'Insert Data Complete', 'state' => true]);
-                    // http_response_code(200);
+            if($timeTotal <= 540){
+                if ($checkBooking -> rowCount() == 0) {
+                    $checkBooking -> closeCursor();
+                    $result = $conn -> query($sqlInsert);
+                    if($result -> rowCount() > 0){
+                        $result -> closeCursor();
+                        $msg = msg_line_notify($datetimeUse, $cars, $conn);
+                        notify_message($msg, $token);
+                        echo json_encode(['message' => 'Insert Data Complete', 'state' => true]);
+                        // http_response_code(200);
+                    }else{
+                        echo json_encode(['message' => 'Error', 'state' => false]);
+                        // http_response_code(400);
+                    }
                 }else{
                     echo json_encode(['message' => 'Error', 'state' => false]);
                     // http_response_code(400);
                 }
             }else{
-                echo json_encode(['message' => 'busy or over9h', 'state' => false]);
+                echo json_encode(['message' => 'over9h', 'state' => false]);
                 // http_response_code(400);
             }
 
         }else{
-                echo json_encode(['message' => 'Error', 'state' => false]);
-                // http_response_code(400);
+            echo json_encode(['message' => 'Error', 'state' => false]);
+            // http_response_code(400);
         }
     }
 ?>
