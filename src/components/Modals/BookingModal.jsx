@@ -27,7 +27,9 @@ import fdatetime from "../../libs/fdatetime";
 import Swal from "sweetalert2";
 import getTime from "date-fns/getTime";
 
-export default function BookingModal() {
+const urlPath = "http://10.1.8.253:80/CRS/API/add-book.php";
+
+export default function BookingModal({ carInfo }) {
   const [formInput, setFormInput] = useState({
     name: "",
     code: "",
@@ -40,7 +42,6 @@ export default function BookingModal() {
   });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const urlPath = "http://10.1.8.253:80/CRS/API/add-book.php";
 
   const handleSubmit = () => {
     const { datetimeUse, datetimeReturn } = formInput;
@@ -51,14 +52,14 @@ export default function BookingModal() {
     axios
       .post(urlPath, { ...formInput })
       .then(({ data: { message, state } }) => {
-        console.log(message, state);
+        // console.log(message, state);
         if (state) {
           Swal.fire({
             title: "จองสำเร็จ (Booking success.)",
             icon: "success",
             timer: 1500,
             showConfirmButton: false,
-          });
+          }).then(() => location.reload());
         } else {
           toast({
             title: "จองไม่สำเร็จ (Booking error.)",

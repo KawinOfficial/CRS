@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import {
   Flex,
   Text,
-  Heading,
   Stack,
   Spacer,
   Icon,
@@ -57,6 +56,7 @@ export default function TopNav({ page }) {
           <Stack direction="row">
             {/* Button */}
             {page ? <TermOfUsed /> : ""}
+
             <Tooltip hasArrow label={page ? "Log in" : "Log out"}>
               <Button bg="none" onClick={handleSignOut}>
                 <Icon as={FaSignOutAlt} />

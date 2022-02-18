@@ -17,22 +17,24 @@ import {
 } from "@chakra-ui/react";
 import { FaSearch } from "react-icons/fa";
 import Loading from "../components/lottie/Loading";
-import { HistoryTab, ReturnTab } from "../components/History";
+import { HistoryTab, ReturnTab, CarTab } from "../components/History";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const urlPath = "http://10.1.8.253:80/crs/API/history.php";
 const urlChk = "http://10.1.8.253:80/crs/API/check-book.php";
 const urlAuthen = "http://10.1.8.253:80/crs/API/authen.php";
+const urlCars = "http://10.1.8.253:80/crs/API/cars-status.php";
 
 export default function History() {
   const navigate = useNavigate();
   const [historyInfo, setHistoryInfo] = useState();
   const [information, setInformation] = useState();
+  const [carInfo, setCarInfo] = useState();
   const [search, setSearch] = useState("");
 
   const getHistory = () => {
-    console.log(search);
+    // console.log(search);
     axios.post(urlPath, { search: search }).then(({ data }) => {
       setHistoryInfo(data);
     });
@@ -41,12 +43,14 @@ export default function History() {
     axios.post(urlChk, { code: "" }).then(({ data }) => {
       setInformation(data);
     });
-    axios.get(urlAuthen).then(({ data: { state } }) => {
-      // console.log(state);
-      if (!state) {
-        navigate("/Login");
-      }
+    axios.get(urlCars).then(({ data }) => {
+      setCarInfo(data);
     });
+    // axios.get(urlAuthen).then(({ data: { state } }) => {
+    //   if (!state) {
+    //     navigate("/Login");
+    //   }
+    // });
   };
 
   useEffect(() => {
@@ -63,7 +67,11 @@ export default function History() {
     };
   }, []);
 
-  if (historyInfo == undefined || information == undefined) {
+  if (
+    historyInfo == undefined ||
+    information == undefined ||
+    carInfo == undefined
+  ) {
     return <Loading />;
   }
 
@@ -73,7 +81,8 @@ export default function History() {
         <Center>
           <Box bg="white" rounded="md" h="89vh" w="98vw" boxShadow="sm" p={2}>
             <Tabs variant="enclosed">
-              <TabList>
+              <TabList overflowX="auto" overflowY="hidden">
+                {/* Tab head */}
                 <Tab>
                   <Stack direction="row">
                     <Text
@@ -81,10 +90,28 @@ export default function History() {
                       fontWeight="bold"
                       fontSize="md"
                       textAlign="center"
+                      isTruncated
                     >
                       คืนกุญแจ
                     </Text>
                     <Text fontWeight="bold">(ReturnKey)</Text>
+                  </Stack>
+                </Tab>
+
+                <Tab>
+                  <Stack direction="row">
+                    <Text
+                      className="font-thai"
+                      fontWeight="bold"
+                      fontSize="md"
+                      textAlign="center"
+                      isTruncated
+                    >
+                      จัดการรถ
+                    </Text>
+                    <Text fontWeight="bold" isTruncated>
+                      (Car Setup)
+                    </Text>
                   </Stack>
                 </Tab>
 
@@ -106,6 +133,10 @@ export default function History() {
               <TabPanels>
                 <TabPanel>
                   <ReturnTab information={information} />
+                </TabPanel>
+
+                <TabPanel>
+                  <CarTab carInfo={carInfo} />
                 </TabPanel>
 
                 <TabPanel>

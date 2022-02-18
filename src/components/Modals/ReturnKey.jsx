@@ -22,11 +22,12 @@ import { GoKey } from "react-icons/go";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+const urlReturn = "http://10.1.8.253:80/CRS/API/return-cancel.php";
+
 export default function ReturnKey({ info }) {
   const [park, setPark] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
-  const urlReturn = "http://10.1.8.253:80/CRS/API/return-cancel.php";
 
   const handleSubmit = () => {
     onClose();

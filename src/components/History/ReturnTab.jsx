@@ -65,7 +65,7 @@ export default function ReturnTab({ information }) {
         w={{ md: "95vw", base: "92vw" }}
         mt={3}
       >
-        <Table variant="striped" colorScheme="blackAlpha">
+        <Table variant="striped" colorScheme="blackAlpha" size="sm">
           <Thead>
             <Tr>
               <Th textAlign="center" fontSize="small">

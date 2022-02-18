@@ -3,17 +3,12 @@ import {
   Stack,
   Text,
   Center,
-  Button,
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
   Spacer,
-  InputGroup,
-  InputLeftElement,
-  Input,
-  Icon,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import Loading from "../components/lottie/Loading";
@@ -21,14 +16,20 @@ import { List, Schedule } from "../components/Scheduler";
 
 import { BookingModal, CancelModal } from "../components/Modals";
 import axios from "axios";
+
 const urlPath = "http://10.1.8.253:80/crs/API/check-book.php";
+const urlCars = "http://10.1.8.253:80/crs/API/cars-status.php";
 
 export default function Scheduler() {
   const [information, setInformation] = useState();
+  const [carInfo, setCarInfo] = useState();
 
   const getTable = () => {
     axios.post(urlPath, { code: "" }).then(({ data }) => {
       setInformation(data);
+    });
+    axios.get(urlCars).then(({ data }) => {
+      setCarInfo(data);
     });
   };
 
@@ -84,7 +85,7 @@ export default function Scheduler() {
                   <Schedule information={information} />
                   {/* Action */}
                   <Stack direction="row" p={2} justifyContent="center">
-                    <BookingModal />
+                    <BookingModal carInfo={carInfo} />
                     <CancelModal information={information} />
                   </Stack>
                 </Box>
