@@ -18,7 +18,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { TermOfUsed } from "../Modals";
 import SNC from "./logo.png";
-const urlPath = "http://10.1.8.253:80/crs/API/logout.php";
+const urlPath = "/crs/API/logout.php";
 
 export default function TopNav({ page }) {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ export default function TopNav({ page }) {
           <Image
             srcSet={SNC}
             w={{ md: "5vw", base: "15vw" }}
-            fallbackSrc="http://10.1.8.253/crs/assets/logo.63ae820a.png"
+            fallbackSrc="/crs/assets/logo.63ae820a.png"
           />
         </Link>
         <Spacer />

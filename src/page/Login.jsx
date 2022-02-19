@@ -20,7 +20,7 @@ import SNC from "../components/Wrapper/logo.png";
 
 import Swal from "sweetalert2";
 import axios from "axios";
-const urlPath = "http://10.1.8.253:80/crs/API/login.php";
+const urlPath = "/crs/API/login.php";
 
 export default function Login() {
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
@@ -74,9 +74,8 @@ export default function Login() {
                   <Image
                     srcSet={SNC}
                     w={{ md: "12vw", base: "35vw" }}
-                    fallbackSrc="http://10.1.8.253/crs/assets/logo.63ae820a.png"
+                    fallbackSrc="/crs/assets/logo.63ae820a.png"
                   />
-
                   <Heading
                     fontSize="3xl"
                     bgGradient="linear(to-l, #b92b27, #1565C0)"
@@ -103,6 +102,7 @@ export default function Login() {
                         }
                       />
                     </InputGroup>
+
                     <FormLabel fontSize={"xl"} pt="3">
                       Password
                     </FormLabel>

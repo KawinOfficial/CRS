@@ -23,8 +23,7 @@ import { FaCheckCircle, FaTimesCircle, FaTimes, FaCheck } from "react-icons/fa";
 import fdatetime from "../../libs/fdatetime";
 import Swal from "sweetalert2";
 
-const urlPath = "http://10.1.8.253:80/CRS/API/add-book.php";
-const urlCars = "http://10.1.8.253:80/crs/API/cars-status.php";
+const urlCars = "/crs/API/cars-status.php";
 
 export default function CarModal({ info }) {
   const [formInput, setFormInput] = useState({
@@ -244,7 +243,12 @@ export default function CarModal({ info }) {
                 </Stack>
                 <DatePicker
                   selected={formInput.blockEnd}
-                  customInput={<Input variant="flushed" />}
+                  customInput={
+                    <Input
+                      variant="flushed"
+                      isInvalid={formInput.blockStart > formInput.blockEnd}
+                    />
+                  }
                   onChange={(blockEnd) =>
                     setFormInput({ ...formInput, blockEnd })
                   }
@@ -292,6 +296,10 @@ export default function CarModal({ info }) {
               me={2}
               onClick={handleSubmit}
               rounded="3xl"
+              disabled={
+                formInput.blockStart > formInput.blockEnd ||
+                formInput.blockStart == ""
+              }
             >
               Confirm
             </Button>

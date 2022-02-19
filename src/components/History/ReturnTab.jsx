@@ -17,7 +17,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 export default function ReturnTab({ information }) {
-  const urlCancel = "http://10.1.8.253:80/CRS/API/return-cancel.php";
+  const urlCancel = "/CRS/API/return-cancel.php";
 
   const dateTimeFormat = (info) => {
     var dateSpilt = info.slice(0, 16).split(" ");

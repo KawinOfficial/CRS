@@ -21,10 +21,10 @@ import { HistoryTab, ReturnTab, CarTab } from "../components/History";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const urlPath = "http://10.1.8.253:80/crs/API/history.php";
-const urlChk = "http://10.1.8.253:80/crs/API/check-book.php";
-const urlAuthen = "http://10.1.8.253:80/crs/API/authen.php";
-const urlCars = "http://10.1.8.253:80/crs/API/cars-status.php";
+const urlPath = "/crs/API/history.php";
+const urlChk = "/crs/API/check-book.php";
+const urlAuthen = "/crs/API/authen.php";
+const urlCars = "/crs/API/cars-status.php";
 
 export default function History() {
   const navigate = useNavigate();

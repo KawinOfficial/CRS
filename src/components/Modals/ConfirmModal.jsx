@@ -21,7 +21,7 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 
 import axios from "axios";
 
-const urlPath = "http://10.1.8.253:80/CRS/API/edit-book.php";
+const urlPath = "/crs/API/edit-book.php";
 
 export default function BookingModal({ formInput }) {
   const [ID, setID] = useState("");
