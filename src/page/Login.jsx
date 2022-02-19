@@ -13,13 +13,14 @@ import {
   FormControl,
   FormLabel,
   Image,
+  Text,
 } from "@chakra-ui/react";
 import { FaSignInAlt, FaUserAlt, FaLock, FaCaretLeft } from "react-icons/fa";
 import Car from "../components/lottie/Car";
 import SNC from "../components/Wrapper/logo.png";
-
 import Swal from "sweetalert2";
 import axios from "axios";
+
 const urlPath = "/crs/API/login.php";
 
 export default function Login() {
@@ -139,6 +140,14 @@ export default function Login() {
                       </Button>
                     </Box>
                   </FormControl>
+                  <Text
+                    className="font-thai"
+                    pt={5}
+                    fontWeight="bold"
+                    textColor="red"
+                  >
+                    ใช้สำหรับ HR เท่านั้น Users อื่นๆให้กดที่ปุ่ม Home
+                  </Text>
                 </VStack>
               </Stack>
             </Box>

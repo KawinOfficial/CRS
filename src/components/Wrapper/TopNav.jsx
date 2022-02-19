@@ -18,6 +18,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { TermOfUsed } from "../Modals";
 import SNC from "./logo.png";
+
 const urlPath = "/crs/API/logout.php";
 
 export default function TopNav({ page }) {
