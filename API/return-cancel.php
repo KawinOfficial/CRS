@@ -22,9 +22,10 @@
         $msgLineNotify = "\n"."รถทะเบียน ". $cars . "\n"  . "วันที่ " . (new DateTime($dateUse))->format('d/m/Y') . "\n\n" . "คิวจองรถ 📌" . "\n" ;
         $i = 0;
         while($i < count($resultTotalBooking)){
+            $name = $resultTotalBooking[$i] -> name;
             $timeStart = $resultTotalBooking[$i] -> datetimeUse;
             $timeEnd = $resultTotalBooking[$i] -> datetimeReturn;
-            $msgLineNotify .= substr($timeStart,11,5) ." - ". substr($timeEnd,11,5) . " น." .  "\n";
+            $msgLineNotify .= substr($timeStart,11,5) ." - ". substr($timeEnd,11,5) . " น." . " (" . explode(" ", $name)[0] . ")" .   "\n";
             $i++;
         }
 
