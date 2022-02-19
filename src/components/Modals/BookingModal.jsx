@@ -106,6 +106,11 @@ export default function BookingModal({ carInfo }) {
     }
   };
 
+  // console.log(carInfo);
+  if (carInfo == undefined) {
+    return <div />;
+  }
+
   return (
     <>
       <Button colorScheme="green" variant="solid" w={180} onClick={onOpen}>
@@ -281,8 +286,15 @@ export default function BookingModal({ carInfo }) {
                     })
                   }
                 >
-                  <option value="6298 (รถกระบะ)">รถกระบะ 6298</option>
-                  <option value="8166 (รถหลังคาสูง)">รถหลังคาสูง 8166</option>
+                  {carInfo.map((info, i) => (
+                    <option
+                      value="8166 (รถหลังคาสูง)"
+                      disabled={!info.status}
+                      key={i}
+                    >
+                      {info.cars}
+                    </option>
+                  ))}
                 </Select>
               </GridItem>
 

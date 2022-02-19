@@ -31,3 +31,13 @@
   border: 6px solid transparent;
   background-clip: content-box;
 }
+
+.blink-status {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0.2;
+  }
+}

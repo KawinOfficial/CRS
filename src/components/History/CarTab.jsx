@@ -91,7 +91,12 @@ export default function CarTab({ carInfo }) {
                         Available
                       </Text>
                     ) : (
-                      <Text textColor="red" fontSize="lg" fontWeight="bold">
+                      <Text
+                        textColor="red"
+                        fontSize="lg"
+                        fontWeight="bold"
+                        className="blink-status"
+                      >
                         Disable
                       </Text>
                     )}

@@ -28,7 +28,7 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(loginForm);
+    // console.log(loginForm);
     if (loginForm.username == "" || loginForm.password == "") {
       Swal.fire({
         icon: "warning",

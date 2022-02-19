@@ -46,11 +46,11 @@ export default function History() {
     axios.get(urlCars).then(({ data }) => {
       setCarInfo(data);
     });
-    // axios.get(urlAuthen).then(({ data: { state } }) => {
-    //   if (!state) {
-    //     navigate("/Login");
-    //   }
-    // });
+    axios.get(urlAuthen).then(({ data: { state } }) => {
+      if (!state) {
+        navigate("/Login");
+      }
+    });
   };
 
   useEffect(() => {
