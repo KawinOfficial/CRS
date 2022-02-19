@@ -52,7 +52,8 @@ export default function BookingModal({ carInfo }) {
     axios
       .post(urlPath, { ...formInput })
       .then(({ data: { message, state } }) => {
-        // console.log(message, state);
+        console.log(formInput);
+        console.log(message, state);
         if (state) {
           Swal.fire({
             title: "จองสำเร็จ (Booking success.)",
@@ -287,11 +288,7 @@ export default function BookingModal({ carInfo }) {
                   }
                 >
                   {carInfo.map((info, i) => (
-                    <option
-                      value="8166 (รถหลังคาสูง)"
-                      disabled={!info.status}
-                      key={i}
-                    >
+                    <option value={info.cars} disabled={!info.status} key={i}>
                       {info.cars}
                     </option>
                   ))}
