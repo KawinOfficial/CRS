@@ -19,16 +19,16 @@
             $resultTotalBooking[] = $row;
         }
         $totalBooking -> closeCursor();
-        $msgLineNotify = "\n"."*รถทะเบียน* ". $cars . "\n"  . "*วันที่* " . (new DateTime($dateUse))->format('d/m/Y') . "\n\n" . "*คิวจองรถ*" . "\n" ;
+        $msgLineNotify = "\n"."รถทะเบียน ". $cars . "\n"  . "วันที่ " . (new DateTime($dateUse))->format('d/m/Y') . "\n\n" . "คิวจองรถ 📌" . "\n" ;
         $i = 0;
         while($i < count($resultTotalBooking)){
             $timeStart = $resultTotalBooking[$i] -> datetimeUse;
             $timeEnd = $resultTotalBooking[$i] -> datetimeReturn;
-            $msgLineNotify .= substr($timeStart,11,5) ." -". substr($timeEnd,11,5) . " น." .  "\n";
+            $msgLineNotify .= substr($timeStart,11,5) ." - ". substr($timeEnd,11,5) . " น." .  "\n";
             $i++;
         }
 
-        $msgLineNotify .= "\n". "*ต้องการจองรถ* >>". "\n" . webUrl;
+        $msgLineNotify .= "\n". "ต้องการจองรถ ⤵". "\n" . webUrl;
 
         return $msgLineNotify;                    
     }
@@ -95,6 +95,8 @@
                         WHERE (cars = '$cars' AND ((datetimeUse <= '$datetimeUse' AND datetimeReturn > '$datetimeUse') OR (datetimeUse < '$datetimeReturn' AND datetimeReturn >= '$datetimeReturn') OR (datetimeUse >= '$datetimeUse' AND datetimeReturn <= '$datetimeReturn')))
                         OR ((datetimeUse <= '$datetimeUse' AND datetimeReturn > '$datetimeUse' AND code = '$code') OR (datetimeUse < '$datetimeReturn' AND datetimeReturn >= '$datetimeReturn' AND code = '$code') OR (datetimeUse >= '$datetimeUse' AND datetimeReturn <= '$datetimeReturn' AND code = '$code'));";
 
+            $sqlBlock = "SELECT*FROM t_cars_status WHERE cars ='$cars' AND blockEnd >= '$datetime' ;";
+            
             $sqlInsert = "INSERT INTO t_cars (cars,name,code,agent,tel,datetime,datetimeUse,datetimeReturn,purpose) 
                             VALUES ('$cars','$name','$code','$agent','$tel','$datetime','$datetimeUse','$datetimeReturn','$purpose');
                             
@@ -103,34 +105,40 @@
 
             $checkBooking = $conn -> query($sqlChk);
 
-            $timeTotal = check_time($datetimeUse, $datetimeReturn, $code, $conn);
-            
-            if($timeTotal <= 540){
-                if ($checkBooking -> rowCount() == 0) {
-                    $checkBooking -> closeCursor();
-                    $result = $conn -> query($sqlInsert);
-                    if($result -> rowCount() > 0){
-                        $result -> closeCursor();
-                        $msg = msg_line_notify($datetimeUse, $cars, $conn);
-                        notify_message($msg, $token);
-                        echo json_encode(['message' => 'Insert Data Complete', 'state' => true]);
-                        // http_response_code(200);
+            $checkBlock = $conn -> query($sqlBlock);
+
+            if($checkBlock->rowCount() == 0){
+                $checkBlock->closeCursor();
+                $timeTotal = check_time($datetimeUse, $datetimeReturn, $code, $conn);
+                if($timeTotal <= 540){
+                    if ($checkBooking -> rowCount() == 0) {
+                        $checkBooking -> closeCursor();
+                        $result = $conn -> query($sqlInsert);
+                        if($result -> rowCount() > 0){
+                            $result -> closeCursor();
+                            $msg = msg_line_notify($datetimeUse, $cars, $conn);
+                            notify_message($msg, $token);
+                            echo json_encode(['message' => 'Insert Data Complete', 'state' => true]);
+                            // http_response_code(200);
+                        }else{
+                            echo json_encode(['message' => 'Error', 'state' => false]);
+                            // http_response_code(400);
+                        }
                     }else{
                         echo json_encode(['message' => 'Error', 'state' => false]);
                         // http_response_code(400);
                     }
                 }else{
-                    echo json_encode(['message' => 'Error', 'state' => false]);
+                    echo json_encode(['message' => 'busy or over9h', 'state' => false]);
                     // http_response_code(400);
                 }
             }else{
-                echo json_encode(['message' => 'over9h', 'state' => false]);
+                echo json_encode(['message' => 'Error', 'state' => false]);
                 // http_response_code(400);
-            }
-
+            }   
         }else{
-            echo json_encode(['message' => 'Error', 'state' => false]);
-            // http_response_code(400);
+                echo json_encode(['message' => 'Error', 'state' => false]);
+                // http_response_code(400);
         }
     }
 ?>

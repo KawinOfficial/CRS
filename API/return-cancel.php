@@ -19,16 +19,16 @@
             $resultTotalBooking[] = $row;
         }
         $totalBooking -> closeCursor();
-        $msgLineNotify = "\n"."*รถทะเบียน* ". $cars . "\n"  . "*วันที่* " . (new DateTime($dateUse))->format('d/m/Y') . "\n\n" . "*คิวจองรถ*" . "\n" ;
+        $msgLineNotify = "\n"."รถทะเบียน ". $cars . "\n"  . "วันที่ " . (new DateTime($dateUse))->format('d/m/Y') . "\n\n" . "คิวจองรถ 📌" . "\n" ;
         $i = 0;
         while($i < count($resultTotalBooking)){
             $timeStart = $resultTotalBooking[$i] -> datetimeUse;
             $timeEnd = $resultTotalBooking[$i] -> datetimeReturn;
-            $msgLineNotify .= substr($timeStart,11,5) ." -". substr($timeEnd,11,5) . " น." .  "\n";
+            $msgLineNotify .= substr($timeStart,11,5) ." - ". substr($timeEnd,11,5) . " น." .  "\n";
             $i++;
         }
 
-        $msgLineNotify .= "\n". "*ต้องการจองรถ* >>". "\n" . webUrl;
+        $msgLineNotify .= "\n". "ต้องการจองรถ ⤵". "\n" . webUrl;
 
         return $msgLineNotify;                    
     }
@@ -65,32 +65,27 @@
             $action = $data -> action;
             $parking = $data -> parking;
 
-            if(((new DateTime() > new DateTime($datetimeUse) && $action == "returned" ) ) || $action == "cancel"){
-                $sql = "DELETE FROM t_cars WHERE code = '$code' AND datetimeUse = '$datetimeUse';
+            $sql = "DELETE FROM t_cars WHERE code = '$code' AND datetimeUse = '$datetimeUse';
                     INSERT INTO t_cars_logger (cars,name,code,agent,tel,datetime,datetimeUse,datetimeReturn,purpose,action,parking) 
                     VALUES ('$cars','$name','$code','$agent','$tel','$datetime','$datetimeUse','$datetimeReturn','$purpose','$action', '$parking');";
 
-                $result = $conn -> query($sql);
+            $result = $conn -> query($sql);
 
-                if($result -> rowCount() > 0){
-                    $result -> closeCursor();
-                    $msg = msg_line_notify($datetimeUse, $cars, $conn);
-                    notify_message($msg, $token);
-                    
-                    if($action == "returned"){
-                        $msgRetrun ="\n". "ผู้ใช้รถเลขที่ทะเบียน " . $cars . "\n" ."ได้ทำการคืนกุญแจแล้ว" . "\n" . "คิวต่อไปสามารถใช้รถได้แล้วค่ะ.";
-                        notify_message($msgRetrun, $token);
-                    }
-
-                    echo json_encode(['message' => 'Insert Data Complete', 'state' => true]);
-                    // http_response_code(200);
-                }else{
-                    echo json_encode(['message' => 'Error', 'state' => false]);
-                    // http_response_code(400);
+            if($result -> rowCount() > 0){
+                $result -> closeCursor();
+                $msg = msg_line_notify($datetimeUse, $cars, $conn);
+                notify_message($msg, $token);
+                
+                if($action == "returned"){
+                    $msgRetrun = "\n" . "📣 ประกาศ ✅" . "\n". "ผู้ใช้รถทะเบียน " . $cars . "\n" ."ได้ทำการคืนกุญแจแล้ว" . "\n" . "คิวต่อไปสามารถใช้รถได้แล้วค่ะ";
+                    notify_message($msgRetrun, $token);
                 }
+
+                echo json_encode(['message' => 'Insert Data Complete', 'state' => true]);
+                // http_response_code(200);
             }else{
-                echo json_encode(['message' => 'The car is not in use.', 'state' => false]);
-            // http_response_code(400);
+                echo json_encode(['message' => 'Error', 'state' => false]);
+                // http_response_code(400);
             }
         }else{
             echo json_encode(['message' => 'Error', 'state' => false]);

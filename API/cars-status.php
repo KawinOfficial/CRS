@@ -6,6 +6,24 @@
     $dataJson = file_get_contents("php://input");
     $data = json_decode($dataJson);
 
+    function notify_message($message, $token){
+        $queryData = array('message' => $message);
+        $queryData = http_build_query($queryData, '', '&');
+        $headerOptions = array(
+            'http' => array(
+                'method' => 'POST',
+                'header' => "Content-Type: application/x-www-form-urlencoded\r\n"
+                    . "Authorization: Bearer " . $token . "\r\n"
+                    . "Content-Length: " . strlen($queryData) . "\r\n",
+                'content' => $queryData
+            ),
+        );
+        $context = stream_context_create($headerOptions);
+        $result = file_get_contents(LINE_API, FALSE, $context);
+        $res = json_decode($result);
+        return $res;
+    }
+
     if($requestMethod == "GET"){
         $sql = "SELECT*FROM t_cars_status ;";
         $result = $conn -> query($sql);
@@ -36,6 +54,17 @@
             $result = $conn -> query($sql);
             if($result -> rowCount() > 0){
                 $result -> closeCursor();
+                
+                if($status == "block"){
+                    $msg = "\n" . "📣 ประกาศ 🚫" . "\n" .  "รถทะเบียน " . $cars . "\n" . "จะไม่สามารถใช้งานได้" . "\n\n"."ในระหว่างวันที่" . "\n" . (new DateTime($blockStart))->format('d/m/Y H:i') ." น.". "\n" . "ถึง" . "\n" . (new DateTime($blockEnd))->format('d/m/Y H:i') . " น." . "\n\n" . "หมายเหตุ " .  $note . "\n" . "ขออภัยในความไม่สะดวก" . "\n" . "ขอบคุณค่ะ 🙏" ;
+                }
+
+                if($status == "normal"){
+                    $msg = "\n" . "📣 ประกาศ ✅" . "\n" .  "รถทะเบียน " . $cars . "\n" . "สามารถใช้งานได้ตามปกติ" . "\n"."ขอบคุณค่ะ 🙏" ;
+                }
+
+                notify_message($msg, $token);
+
                 echo json_encode(['message' => 'Update Data Complete', 'state' => true]);
                 // http_response_code(200);
             }else{
