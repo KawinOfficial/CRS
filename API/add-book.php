@@ -110,7 +110,8 @@
 
             if($checkBlock->rowCount() == 0){
                 $checkBlock->closeCursor();
-                $timeTotal = check_time($datetimeUse, $datetimeReturn, $code, $conn);
+//                 $timeTotal = check_time($datetimeUse, $datetimeReturn, $code, $conn);
+                $timeTotal = 0;
                 if($timeTotal <= 540){
                     if ($checkBooking -> rowCount() == 0) {
                         $checkBooking -> closeCursor();
