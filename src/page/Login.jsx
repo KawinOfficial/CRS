@@ -28,7 +28,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     // console.log(loginForm);
     if (loginForm.username == "" || loginForm.password == "") {
       Swal.fire({
@@ -88,7 +88,15 @@ export default function Login() {
                 </VStack>
 
                 <VStack pt={5}>
-                  <FormControl isRequired w="75%" onSubmit={handleSubmit}>
+                  <FormControl
+                    isRequired
+                    w="75%"
+                    onKeyPress={({ key }) => {
+                      if (key === "Enter") {
+                        handleSubmit();
+                      }
+                    }}
+                  >
                     <FormLabel fontSize={"xl"}>Username</FormLabel>
                     <InputGroup>
                       <InputLeftElement

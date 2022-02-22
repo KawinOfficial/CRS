@@ -173,7 +173,7 @@ export default function BookingModal({ carInfo }) {
                   </Text>
                 </Stack>
                 <Input
-                  placeholder="Fullname"
+                  placeholder="Name"
                   size="md"
                   variant="flushed"
                   onChange={({ target: { value: name } }) =>
@@ -324,7 +324,7 @@ export default function BookingModal({ carInfo }) {
                   timeCaption="Start"
                   dateFormat="dd/MM/yyyy HH:mm"
                   minDate={new Date()}
-                  maxDate={addDays(new Date(), 3)}
+                  maxDate={addDays(new Date(), 7)}
                   placeholderText="Select a Time"
                   filterTime={filterPassedTime}
                 />
@@ -355,7 +355,7 @@ export default function BookingModal({ carInfo }) {
                   timeCaption="Return"
                   dateFormat="dd/MM/yyyy HH:mm"
                   minDate={formInput.datetimeUse}
-                  maxDate={addDays(new Date(), 3)}
+                  maxDate={addDays(new Date(), 8)}
                   placeholderText="Select a Time"
                   disabled={formInput.datetimeUse == ""}
                 />
@@ -387,16 +387,7 @@ export default function BookingModal({ carInfo }) {
                 </Stack>
               </GridItem>
 
-              {diffTime(formInput.datetimeUse, formInput.datetimeReturn) > 9 ? (
-                <GridItem>
-                  <Stack direction="row">
-                    <Text fontWeight="bold" fontSize="sm" textColor="red">
-                      ***จองได้ไม่เกิน 9 ชั่วโมง/คน/วันเท่านั้น
-                    </Text>
-                  </Stack>
-                </GridItem>
-              ) : diffTime(formInput.datetimeUse, formInput.datetimeReturn) <
-                0 ? (
+              {diffTime(formInput.datetimeUse, formInput.datetimeReturn) < 0 ? (
                 <GridItem>
                   <Stack direction="row">
                     <Text fontWeight="bold" fontSize="sm" textColor="red">

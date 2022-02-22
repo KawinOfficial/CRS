@@ -75,25 +75,25 @@ export default function TermOfUsed() {
 
               <Text className="font-thai" fontSize="sm">
                 2. ผู้ใช้งาน สามารถจองคิวรถ
-                <b className="font-thai">ล่วงหน้าได้ ไม่เกิน 3 วัน</b>
+                <b className="font-thai">ล่วงหน้าได้ ไม่เกิน 7 วัน</b>
                 {/* <span fontSize="small">
                   {" "}
                   (Users can reserve a car no more than 3 days in advance.)
                 </span> */}
               </Text>
 
-              <Text className="font-thai" fontSize="sm">
+              {/* <Text className="font-thai" fontSize="sm">
                 3. ผู้ใช้งาน สามารถจองคิวรถได้
                 <b className="font-thai">รวมแล้วไม่เกิน 9 ชั่วโมง/วัน</b>
-                {/* <span fontSize="small">
+                <span fontSize="small">
                   {" "}
                   (Users can reserve a car for a total of not more than 9
                   hours/day.)
-                </span> */}
-              </Text>
+                </span>
+              </Text> */}
 
               <Text className="font-thai" fontSize="sm">
-                4. ผู้ใช้งาน ต้อง
+                3. ผู้ใช้งาน ต้อง
                 <b className="font-thai">มีใบอนุญาตขับขี่รถยนต์</b>
                 ตามที่กฎหมายกำหนด
                 {/* <span fontSize="small">
@@ -103,7 +103,7 @@ export default function TermOfUsed() {
               </Text>
 
               <Text className="font-thai" fontSize="sm">
-                5.
+                4.
                 <span className="font-thai font-term"> ก่อนใช้รถยนต์</span>{" "}
                 ติดต่อรับกุญแจได้ที่แผนก HR
                 {/* <span fontSize="small">
@@ -113,7 +113,7 @@ export default function TermOfUsed() {
               </Text>
 
               <Text className="font-thai" fontSize="sm">
-                6.
+                5.
                 <span className="font-thai font-term"> หลังใช้รถยนต์</span>{" "}
                 จอดรถที่บริเวณลานจอดซอย 13 และคืนกุญแจให้กับ HR
                 {/* <span fontSize="small">
@@ -124,7 +124,7 @@ export default function TermOfUsed() {
               </Text>
 
               <Text className="font-thai" fontSize="sm">
-                7. ผู้ใช้งาน
+                6. ผู้ใช้งาน
                 <b className="font-thai">
                   {" "}
                   ควรส่งคืนรถภายในกรอบเวลาที่ได้จองไว้
@@ -140,7 +140,7 @@ export default function TermOfUsed() {
               </Text>
 
               <Text className="font-thai" fontSize="sm">
-                8. กรณีที่ผู้ใช้งาน
+                7. กรณีที่ผู้ใช้งาน
                 <b className="font-thai"> ไม่ติดต่อรับกุญแจภายใน 1 ชั่วโมง</b>
                 นับจากเวลาที่จองคิวไว้
                 ขอสงวนสิทธิในการยกเลิกคิวจองตามการพิจารณาของ HR
@@ -153,7 +153,7 @@ export default function TermOfUsed() {
               </Text>
 
               <Text className="font-thai" fontSize="sm">
-                9.พบปัญหาการใช้งาน หรือมีเหตุฉุกเฉิน ติดต่อ HR เบอร์โทรศัพท์
+                8.พบปัญหาการใช้งาน หรือมีเหตุฉุกเฉิน ติดต่อ HR เบอร์โทรศัพท์
                 <span className="font-thai font-term"> 038-026-750</span>
                 {/* <span fontSize="small">
                   {" "}

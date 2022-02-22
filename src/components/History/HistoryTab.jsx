@@ -1,6 +1,11 @@
 import React from "react";
 import { Box, Icon, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
-import { FaCheckCircle, FaTimesCircle, FaMapPin } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaTimesCircle,
+  FaMapPin,
+  FaUserEdit,
+} from "react-icons/fa";
 
 export default function HistoryTab({ historyInfo }) {
   const actionButton = (info) => {
@@ -8,6 +13,8 @@ export default function HistoryTab({ historyInfo }) {
       <Icon as={FaCheckCircle} color="green" boxSize={7} />
     ) : info.action == "booking" ? (
       <Icon as={FaMapPin} boxSize={7} />
+    ) : info.action == "Edit" ? (
+      <Icon as={FaUserEdit} color="yellowgreen" boxSize={7} />
     ) : (
       <Icon as={FaTimesCircle} color="red" boxSize={7} />
     );
