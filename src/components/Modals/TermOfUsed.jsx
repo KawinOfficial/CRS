@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 import { FaBookOpen } from "react-icons/fa";
+import FormGoogle from "./FormGoogle";
 
 export default function TermOfUsed() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -59,6 +60,8 @@ export default function TermOfUsed() {
 
           {/* Body */}
           <ModalBody>
+            <FormGoogle />
+
             <Stack>
               {/* <Text className="font-thai" fontWeight="bold" fontSize="md">
                 การใช้งาน

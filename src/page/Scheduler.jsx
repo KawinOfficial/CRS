@@ -17,8 +17,8 @@ import { List, Schedule } from "../components/Scheduler";
 import { BookingModal, CancelModal } from "../components/Modals";
 import axios from "axios";
 
-const urlPath = "/crs/API/check-book.php";
-const urlCars = "/crs/API/cars-status.php";
+const urlPath = "http://10.1.8.117/crs/API/check-book.php";
+const urlCars = "http://10.1.8.117/crs/API/cars-status.php";
 
 export default function Scheduler() {
   const [information, setInformation] = useState();

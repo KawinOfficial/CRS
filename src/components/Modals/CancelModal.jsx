@@ -27,7 +27,7 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const urlCancel = "/crs/API/return-cancel.php";
+const urlCancel = "http://10.1.8.117/crs/API/return-cancel.php";
 
 export default function CancelModal({ information }) {
   const { isOpen, onOpen, onClose } = useDisclosure();

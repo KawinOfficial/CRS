@@ -23,7 +23,7 @@ import { FaCheckCircle, FaTimesCircle, FaTimes, FaCheck } from "react-icons/fa";
 import fdatetime from "../../libs/fdatetime";
 import Swal from "sweetalert2";
 
-const urlCars = "/crs/API/cars-status.php";
+const urlCars = "http://10.1.8.117/crs/API/cars-status.php";
 
 export default function CarModal({ info }) {
   const [formInput, setFormInput] = useState({

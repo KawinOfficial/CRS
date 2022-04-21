@@ -27,7 +27,7 @@ import fdatetime from "../../libs/fdatetime";
 import Swal from "sweetalert2";
 import getTime from "date-fns/getTime";
 
-const urlPath = "/crs/API/add-book.php";
+const urlPath = "http://10.1.8.117/crs/API/add-book.php";
 
 export default function BookingModal({ carInfo }) {
   const [formInput, setFormInput] = useState({

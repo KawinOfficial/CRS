@@ -21,7 +21,7 @@ import SNC from "../components/Wrapper/logo.png";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const urlPath = "/crs/API/login.php";
+const urlPath = "http://10.1.8.117/crs/API/login.php";
 
 export default function Login() {
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });

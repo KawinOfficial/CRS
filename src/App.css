@@ -17,6 +17,17 @@
   font-style: italic;
 }
 
+.text-sp {
+  font-family: "Noto Serif Thai", serif;
+  color: red;
+  font-weight: bold;
+}
+.text-sp2 {
+  font-family: "Noto Serif Thai", serif;
+  color: green;
+  font-weight: bold;
+}
+
 ::-webkit-scrollbar {
   width: 15px;
 }
