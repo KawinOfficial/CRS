@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 
 ReactDOM.render(
-  <BrowserRouter basename={"/crs"}>
+  <BrowserRouter basename="/crs">
     {/* <BrowserRouter> */}
     <ChakraProvider>
       <App />

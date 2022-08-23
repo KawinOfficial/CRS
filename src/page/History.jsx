@@ -21,10 +21,10 @@ import { HistoryTab, ReturnTab, CarTab } from "../components/History";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const urlPath = "http://10.1.8.117/crs/API/history.php";
-const urlChk = "http://10.1.8.117/crs/API/check-book.php";
-const urlAuthen = "http://10.1.8.117/crs/API/authen.php";
-const urlCars = "http://10.1.8.117/crs/API/cars-status.php";
+const urlPath = "/crs/API/history.php";
+const urlChk = "/crs/API/check-book.php";
+const urlAuthen = "/crs/API/authen.php";
+const urlCars = "/crs/API/cars-status.php";
 
 export default function History() {
   const navigate = useNavigate();
@@ -88,29 +88,10 @@ export default function History() {
                     <Text
                       className="font-thai"
                       fontWeight="bold"
-                      fontSize="md"
+                      fontSize="sm"
                       textAlign="center"
-                      isTruncated
                     >
-                      คืนกุญแจ
-                    </Text>
-                    <Text fontWeight="bold">(ReturnKey)</Text>
-                  </Stack>
-                </Tab>
-
-                <Tab>
-                  <Stack direction="row">
-                    <Text
-                      className="font-thai"
-                      fontWeight="bold"
-                      fontSize="md"
-                      textAlign="center"
-                      isTruncated
-                    >
-                      จัดการรถ
-                    </Text>
-                    <Text fontWeight="bold" isTruncated>
-                      (Car Setup)
+                      คืนกุญแจ (ReturnKey)
                     </Text>
                   </Stack>
                 </Tab>
@@ -120,12 +101,24 @@ export default function History() {
                     <Text
                       className="font-thai"
                       fontWeight="bold"
-                      fontSize="md"
+                      fontSize="sm"
                       textAlign="center"
                     >
-                      ประวัติ
+                      จัดการรถ (Car Setup)
                     </Text>
-                    <Text fontWeight="bold">(History)</Text>
+                  </Stack>
+                </Tab>
+
+                <Tab>
+                  <Stack direction="row">
+                    <Text
+                      className="font-thai"
+                      fontWeight="bold"
+                      fontSize="sm"
+                      textAlign="center"
+                    >
+                      ประวัติ (History)
+                    </Text>
                   </Stack>
                 </Tab>
               </TabList>
@@ -140,7 +133,6 @@ export default function History() {
                 </TabPanel>
 
                 <TabPanel>
-                  {/* Search */}
                   <Stack direction="row">
                     <InputGroup w={{ md: "30%", base: "100%" }}>
                       <InputLeftElement

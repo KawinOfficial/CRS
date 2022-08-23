@@ -19,7 +19,7 @@ import Swal from "sweetalert2";
 import { TermOfUsed } from "../Modals";
 import SNC from "./logo.png";
 
-const urlPath = "http://10.1.8.117/crs/API/logout.php";
+const urlPath = "/crs/API/logout.php";
 
 export default function TopNav({ page }) {
   const navigate = useNavigate();
@@ -45,9 +45,9 @@ export default function TopNav({ page }) {
       <Flex color="white" alignItems="center">
         <Link onClick={() => navigate("/")}>
           <Image
-            srcSet={SNC}
+            // src={SNC}
             w={{ md: "5vw", base: "15vw" }}
-            fallbackSrc="http://10.1.8.117/crs/assets/logo.63ae820a.png"
+            fallbackSrc="/crs/assets/logo.63ae820a.png"
           />
         </Link>
         <Spacer />

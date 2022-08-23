@@ -21,7 +21,7 @@ import SNC from "../components/Wrapper/logo.png";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const urlPath = "http://10.1.8.117/crs/API/login.php";
+const urlPath = "/crs/API/login.php";
 
 export default function Login() {
   const [loginForm, setLoginForm] = useState({ username: "", password: "" });
@@ -73,7 +73,7 @@ export default function Login() {
               <Stack spacing={2} pb="5">
                 <VStack>
                   <Image
-                    srcSet={SNC}
+                    // src={SNC}
                     w={{ md: "12vw", base: "35vw" }}
                     fallbackSrc="/crs/assets/logo.63ae820a.png"
                   />

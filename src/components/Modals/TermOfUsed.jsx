@@ -60,13 +60,9 @@ export default function TermOfUsed() {
 
           {/* Body */}
           <ModalBody>
-            <FormGoogle />
+            {/* <FormGoogle /> */}
 
             <Stack>
-              {/* <Text className="font-thai" fontWeight="bold" fontSize="md">
-                การใช้งาน
-              </Text> */}
-
               <Text className="font-thai" fontSize="sm">
                 1. ผู้ใช้งานลงทะเบียนเพื่อ เช็คคิวรถ / จองคิวรถ / ยกเลิกคิวรถ
                 ได้ที่เว็บไซต์นี้เท่านั้น{" "}

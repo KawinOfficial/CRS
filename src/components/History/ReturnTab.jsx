@@ -10,6 +10,7 @@ import {
   Button,
   Icon,
   Tooltip,
+  TableContainer,
 } from "@chakra-ui/react";
 import { ReturnKey } from "../Modals";
 import { FaTimesCircle } from "react-icons/fa";
@@ -65,77 +66,77 @@ export default function ReturnTab({ information }) {
         w={{ md: "95vw", base: "92vw" }}
         mt={3}
       >
-        <Table variant="striped" colorScheme="blackAlpha" size="sm">
-          <Thead>
-            <Tr>
-              <Th textAlign="center" fontSize="small">
-                ลำดับ <br />
-                (No.)
-              </Th>
-              <Th fontSize="small" isTruncated>
-                เลขทะเบียน <br />
-                (Licanse)
-              </Th>
-              <Th fontSize="small">
-                ผู้จอง <br />
-                (Booking by)
-              </Th>
-              <Th fontSize="small" isTruncated>
-                รหัสพนักงาน <br />
-                (Employee ID)
-              </Th>
-              <Th textAlign="center" fontSize="small">
-                ตั้งแต่เวลา <br />
-                (Start)
-              </Th>
-              <Th textAlign="center" fontSize="small">
-                จนถึงเวลา <br />
-                (Return)
-              </Th>
-              <Th textAlign="center" fontSize="small">
-                Action
-              </Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {information.map((info, i) => (
-              <React.Fragment key={i}>
-                <Tr
-                  _hover={{
-                    backgroundColor: "#EEE",
-                  }}
-                >
-                  <Td textAlign="center">{i + 1}</Td>
-                  <Td isTruncated>{info.cars}</Td>
-                  <Td fontWeight="bold" isTruncated>
-                    {info.name}
-                  </Td>
-                  <Td isTruncated>{info.code}</Td>
-                  <Td textAlign="center" isTruncated>
-                    {dateTimeFormat(info.datetimeUse)}
-                  </Td>
-                  <Td textAlign="center" isTruncated>
-                    {dateTimeFormat(info.datetimeReturn)}
-                  </Td>
-                  <Td textAlign="center" isTruncated>
-                    <ReturnKey info={info} />
-                    <Tooltip hasArrow label="Cancel" placement="top">
-                      <Button
-                        colorScheme="red"
-                        size="sm"
-                        ms={2}
-                        onClick={() => handleSubmit(info)}
-                        rounded="3xl"
-                      >
-                        <Icon as={FaTimesCircle} />
-                      </Button>
-                    </Tooltip>
-                  </Td>
-                </Tr>
-              </React.Fragment>
-            ))}
-          </Tbody>
-        </Table>
+        <TableContainer>
+          <Table variant="striped" colorScheme="blackAlpha" size="sm">
+            <Thead>
+              <Tr>
+                <Th textAlign="center" fontSize="small">
+                  ลำดับ <br />
+                  (No.)
+                </Th>
+                <Th fontSize="small">
+                  เลขทะเบียน <br />
+                  (Licanse)
+                </Th>
+                <Th fontSize="small">
+                  ผู้จอง <br />
+                  (Booking by)
+                </Th>
+                <Th fontSize="small">
+                  รหัสพนักงาน <br />
+                  (Employee ID)
+                </Th>
+                <Th textAlign="center" fontSize="small">
+                  ตั้งแต่เวลา <br />
+                  (Start)
+                </Th>
+                <Th textAlign="center" fontSize="small">
+                  จนถึงเวลา <br />
+                  (Return)
+                </Th>
+                <Th textAlign="center" fontSize="small">
+                  Action
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {information.map((info, i) => (
+                <React.Fragment key={i}>
+                  <Tr
+                    _hover={{
+                      backgroundColor: "#EEE",
+                    }}
+                  >
+                    <Td textAlign="center">{i + 1}</Td>
+                    <Td>{info.cars}</Td>
+                    <Td fontWeight="bold">{info.name}</Td>
+                    <Td>{info.code}</Td>
+                    <Td textAlign="center">
+                      {dateTimeFormat(info.datetimeUse)}
+                    </Td>
+                    <Td textAlign="center">
+                      {dateTimeFormat(info.datetimeReturn)}
+                    </Td>
+                    <Td textAlign="center">
+                      <ReturnKey info={info} />
+                      <Tooltip hasArrow label="Cancel" placement="top">
+                        <Button
+                          colorScheme="red"
+                          size="sm"
+                          ms={2}
+                          onClick={() => handleSubmit(info)}
+                          rounded="3xl"
+                        >
+                          <Icon as={FaTimesCircle} />
+                        </Button>
+                      </Tooltip>
+                    </Td>
+                  </Tr>
+                </React.Fragment>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
       </Box>
     </>
   );

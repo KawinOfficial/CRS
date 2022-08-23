@@ -17,7 +17,7 @@ const localizer = dateFnsLocalizer({
 
 export default function MyCalendar({ information }) {
   const eventList = [];
-  information.map((data, i) => {
+  information?.map((data) => {
     const user = data.name;
     const car = data.cars;
     const start = data.datetimeUse.slice(0, 19).split(" ");
@@ -60,7 +60,11 @@ export default function MyCalendar({ information }) {
           style={{ height: "65vh" }}
           eventPropGetter={(event) => {
             const backgroundColor =
-              event.desc == "6298 (รถกระบะ)" ? "#6be585" : "#fdbb2d";
+              event.desc == "6298 (รถกระบะ)"
+                ? "#6be585"
+                : event.desc == "8166 (รถหลังคาสูง)"
+                ? "#fdbb2d"
+                : "#89CFFD";
             return { style: { backgroundColor } };
           }}
           views={["month", "week", "day"]}

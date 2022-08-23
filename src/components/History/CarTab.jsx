@@ -2,11 +2,12 @@ import React from "react";
 import {
   Text,
   Stack,
-  Box,
   Icon,
   Grid,
   GridItem,
   VStack,
+  Center,
+  Box,
 } from "@chakra-ui/react";
 import { FaCarAlt } from "react-icons/fa";
 import { CarModal } from "../Modals";
@@ -21,22 +22,21 @@ export default function CarTab({ carInfo }) {
     <>
       <Grid
         templateColumns={{ md: "repeat(2, 1fr)", base: "repeat(1, 1fr)" }}
-        gap={4}
-        overflowY="auto"
-        h="50vh"
-        px={2}
+        gap={5}
+        overflow="auto"
+        maxH="75vh"
+        p={3}
       >
         {carInfo.map((info, i) => (
           <GridItem key={i}>
-            <Box
-              justifyContent="center"
-              alignItems="center"
+            <Center
               shadow="lg"
               rounded="2xl"
               p={2}
+              bgColor={info.status ? "" : "red.100"}
             >
-              <Stack direction="row" isTruncated>
-                <VStack m={2}>
+              <Stack direction="row" minW="450px">
+                <VStack mx={2}>
                   <Icon as={FaCarAlt} boxSize={90} />
                   <CarModal info={info} />
                 </VStack>
@@ -103,7 +103,7 @@ export default function CarTab({ carInfo }) {
                   </Stack>
                 </Stack>
               </Stack>
-            </Box>
+            </Center>
           </GridItem>
         ))}
       </Grid>
